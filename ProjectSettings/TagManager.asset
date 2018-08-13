@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Road
+  - Wall
+  - Car
+  - Apple
+  - Checkpoint
+  - Lap
+  - Wheel
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Car
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Obsticle
+    uniqueID: 1819852877
+    locked: 0
+  - name: Road
+    uniqueID: 1478929223
+    locked: 0
+  - name: Car
+    uniqueID: 1694615825
+    locked: 0
+  - name: Wheel
+    uniqueID: 4227049507
+    locked: 0
