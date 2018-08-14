@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
     <Config>
-      <PopulationSize>16</PopulationSize>
+      <PopulationSize>21</PopulationSize>
       <SpecieCount>5</SpecieCount>
       <Activation>
         <Scheme>Acyclic</Scheme>

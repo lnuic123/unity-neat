@@ -10,8 +10,8 @@ using System.IO;
 
 public class Optimizer : MonoBehaviour {
 
-    const int NUM_INPUTS = 21;
-    const int NUM_OUTPUTS = 21;
+    const int NUM_INPUTS = 21; // 5 
+    const int NUM_OUTPUTS = 21; // 2
 
     public int Trials;
     public float TrialDuration;
@@ -59,7 +59,6 @@ public class Optimizer : MonoBehaviour {
         timeLeft -= Time.deltaTime;
         accum += Time.timeScale / Time.deltaTime;
         ++frames;
-        if (Time.timeScale != 2) Time.timeScale = 2;
         if (timeLeft <= 0.0)
         {
             var fps = accum / frames;
@@ -67,13 +66,11 @@ public class Optimizer : MonoBehaviour {
             accum = 0.0f;
             frames = 0;
             //   print("FPS: " + fps);
-            /*
             if (fps < 10)
             {
-                Time.timeScale = 6;
+                Time.timeScale--;
                 print("Lowering time scale to " + Time.timeScale);
             }
-            */
         }
     }
 
@@ -90,8 +87,9 @@ public class Optimizer : MonoBehaviour {
 
         var evoSpeed = 25;
 
-     //   Time.fixedDeltaTime = 0.045f;
-        Time.timeScale = evoSpeed;       
+        //   Time.fixedDeltaTime = 0.045f;
+        //Time.timeScale = evoSpeed;       
+        Time.timeScale = 2;
         _ea.StartContinue();
         EARunning = true;
     }
@@ -103,7 +101,6 @@ public class Optimizer : MonoBehaviour {
 
         Fitness = _ea.Statistics._maxFitness;
         Generation = _ea.CurrentGeneration;
-      
 
     //    Utility.Log(string.Format("Moving average: {0}, N: {1}", _ea.Statistics._bestFitnessMA.Mean, _ea.Statistics._bestFitnessMA.Length));
 
@@ -232,22 +229,22 @@ public class Optimizer : MonoBehaviour {
         }
 
         GUI.Button(new Rect(Screen.width - 130, 10, 120, 40), string.Format("Current timescale:\n" + Time.timeScale));
-        if (GUI.Button(new Rect(Screen.width - 130, 50, 60, 30), "+"))
-        {
-            Time.timeScale++;
-        }
-        if (GUI.Button(new Rect(Screen.width - 70, 50, 60, 30), "-"))
+        if (GUI.Button(new Rect(Screen.width - 130, 50, 60, 30), "-"))
         {
             Time.timeScale--;
         }
-        GUI.Button(new Rect(Screen.width - 260, 10, 120, 40), string.Format("Trial Duration:\n" + TrialDuration));
-        if (GUI.Button(new Rect(Screen.width - 260, 50, 60, 30), "+10"))
+        if (GUI.Button(new Rect(Screen.width - 70, 50, 60, 30), "+"))
         {
-            TrialDuration += 10;
+            Time.timeScale++;
         }
-        if (GUI.Button(new Rect(Screen.width - 200, 50, 60, 30), "-10"))
+        GUI.Button(new Rect(Screen.width - 260, 10, 120, 40), string.Format("Trial Duration:\n" + TrialDuration));
+        if (GUI.Button(new Rect(Screen.width - 260, 50, 60, 30), "-10"))
         {
             TrialDuration -= 10;
+        }
+        if (GUI.Button(new Rect(Screen.width - 200, 50, 60, 30), "+10"))
+        {
+            TrialDuration += 10;
         }
 
         GUI.Button(new Rect(10, Screen.height - 70, 100, 60), string.Format("Generation: {0}\nFitness: {1:0.00}", Generation, Fitness));

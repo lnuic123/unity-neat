@@ -10,8 +10,7 @@ public class JointScript : MonoBehaviour
     private GameObject wheelobject;
     public float speedF, speedB, torqueF, torqueB;
     private float WheelRadius = 0f;
-
-    // Use this for initialization
+    
     void Start()
     {
         float newObjPositionX = transform.position.x + Mathf.Cos(2f * Mathf.PI) * transform.localScale.y / 3;
@@ -23,7 +22,7 @@ public class JointScript : MonoBehaviour
 
         WheelJoint.connectedBody = wheelobject.GetComponent<Rigidbody2D>();
     }
-    // Update is called once per frame
+
     void Update()
     {
         if (WheelRadius != 0f)
@@ -32,23 +31,18 @@ public class JointScript : MonoBehaviour
             WheelRadius = 0f;
         }
         
-            wheelMotor.motorSpeed = -speedF;
-            wheelMotor.maxMotorTorque = torqueF;
-            WheelJoint.motor = wheelMotor;
+        wheelMotor.motorSpeed = -speedF;
+        wheelMotor.maxMotorTorque = torqueF;
+        WheelJoint.motor = wheelMotor;
+
+        /*
         if (Input.GetAxisRaw("Vertical") < 0)
         {
             wheelMotor.motorSpeed = -speedB;
             wheelMotor.maxMotorTorque = torqueB;
             WheelJoint.motor = wheelMotor;
         }
-    }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag.Equals("Car") || collision.gameObject.tag.Equals("Wheel"))
-        {
-            Physics2D.IgnoreCollision(collision.collider, gameObject.GetComponent<Collider2D>());
-        }
+        */
     }
     public void SetWheelRadius(float r)
     {
