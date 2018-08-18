@@ -7,7 +7,7 @@ public class Car_Script : UnitController {
     bool IsRunning;
     private int JointCount = 0;
     public GameObject JointPrefab;
-    public float JointAngleDelta = 5f;
+    public float JointAngleDelta = 0.5f;
     IBlackBox box;
     
     void FixedUpdate()
@@ -17,13 +17,13 @@ public class Car_Script : UnitController {
             // input array assained to constant because without it output is constantly 0.5f
             ISignalArray inputArr = box.InputSignalArray;
 
-            for (var i = 0; i < 21; i++) inputArr[i] = 0.5f;
+            for (var i = 0; i < 25; i++) inputArr[i] = 0.5f;
 
             box.Activate();
 
             ISignalArray outputArr = box.OutputSignalArray;
 
-            JointCount = (int)Mathf.Round((float)outputArr[0] * 9 + 1);
+            JointCount = (int)Mathf.Round((float)outputArr[0] * 5 + 1);
             /*
             string tests = "";
             for(var i = 0; i < 21; i++)

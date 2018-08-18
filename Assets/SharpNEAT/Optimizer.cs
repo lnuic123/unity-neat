@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using SharpNeat.Phenomes;
+using SharpNeat.Network;
 using System.Collections.Generic;
 using SharpNeat.EvolutionAlgorithms;
 using SharpNeat.Genomes.Neat;
@@ -10,8 +11,8 @@ using System.IO;
 
 public class Optimizer : MonoBehaviour {
 
-    const int NUM_INPUTS = 21; // 5 
-    const int NUM_OUTPUTS = 21; // 2
+    const int NUM_INPUTS = 5; // 5 
+    const int NUM_OUTPUTS = 2; // 2
 
     public int Trials;
     public float TrialDuration;
@@ -33,9 +34,9 @@ public class Optimizer : MonoBehaviour {
 
     private uint Generation;
     private double Fitness;
-
-	// Use this for initialization
-	void Start () {
+    public DrawNet NeuralNetworkSheme;
+    // Use this for initialization
+    void Start () {
         Utility.DebugLog = true;
         experiment = new SimpleExperiment();
         XmlDocument xmlConfig = new XmlDocument();
@@ -45,8 +46,8 @@ public class Optimizer : MonoBehaviour {
 
         experiment.Initialize("Car Experiment", xmlConfig.DocumentElement, NUM_INPUTS, NUM_OUTPUTS);
 
-        champFileSavePath = Application.persistentDataPath + string.Format("/{0}.champ.xml", "car");
-        popFileSavePath = Application.persistentDataPath + string.Format("/{0}.pop.xml", "car");       
+        champFileSavePath = Application.persistentDataPath + string.Format("/PopSaveFolder/{0}.champ.xml", "car");
+        popFileSavePath = Application.persistentDataPath + string.Format("/PopSaveFolder/{0}.pop.xml", "car");       
 
         print(champFileSavePath);
     }
@@ -102,11 +103,9 @@ public class Optimizer : MonoBehaviour {
         Fitness = _ea.Statistics._maxFitness;
         Generation = _ea.CurrentGeneration;
 
-    //    Utility.Log(string.Format("Moving average: {0}, N: {1}", _ea.Statistics._bestFitnessMA.Mean, _ea.Statistics._bestFitnessMA.Length));
-
-    
+        //    Utility.Log(string.Format("Moving average: {0}, N: {1}", _ea.Statistics._bestFitnessMA.Mean, _ea.Statistics._bestFitnessMA.Length));
+        NeuralNetworkSheme.DrawNetwork(_ea);
     }
-
     void ea_PauseEvent(object sender, EventArgs e)
     {
         Time.timeScale = 1;
@@ -138,7 +137,7 @@ public class Optimizer : MonoBehaviour {
        
 
       
-        EARunning = false;        
+        EARunning = false;
         
     }
 

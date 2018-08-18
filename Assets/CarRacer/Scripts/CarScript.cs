@@ -106,24 +106,24 @@ public class CarScript : UnitController {
             }
 
             ISignalArray inputArr = box.InputSignalArray;
-            inputArr[0] = 1 - frontSensor;
-            inputArr[1] = 1 - leftFrontSensor;
-            inputArr[2] = 1 - leftSensor;
-            inputArr[3] = 1 - rightFrontSensor;
-            inputArr[4] = 1 - rightSensor;
+            inputArr[0] = frontSensor;
+            inputArr[1] = leftFrontSensor;
+            inputArr[2] = leftSensor;
+            inputArr[3] = rightFrontSensor;
+            inputArr[4] = rightSensor;
 
             box.Activate();
 
             ISignalArray outputArr = box.OutputSignalArray;
 
-            var rotation = (float)outputArr[0] * 2 - 1;
-            var velocity = (float)outputArr[1] * 2 - 1;
+            var rotation = ((float)outputArr[0] * 2 - 1) * 5f;
+            var velocity = ((float)outputArr[1] * 2 - 1) / 20;
 
-            CarRotation += rotation * 5f;
+            CarRotation += rotation;
 
             if (Math.Abs(CarVelocity) < maxCarSpeed)
             {
-                CarVelocity += velocity/20;
+                CarVelocity += velocity;
             }
 
             transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, transform.rotation.y, CarRotation));

@@ -4,23 +4,11 @@ using UnityEngine;
 
 public class CameraControler : MonoBehaviour {
 
-	// Use this for initialization
+    // Use this for initialization
+    public DrawNet NeuralNetwork;
 	void Start () {
 		
 	}
-    void OnGUI()
-    {
-        if (Input.GetKey(KeyCode.LeftControl))
-        {
-            if (Event.current.type == EventType.ScrollWheel)
-                transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + Event.current.delta.y / 5);
-        }
-        else
-        {
-            if (Event.current.type == EventType.ScrollWheel)
-                transform.position = new Vector3(transform.position.x + Event.current.delta.y / 5, transform.position.y, transform.position.z);
-        }
-    }
     // Update is called once per frame
     void Update () {
         if (Input.GetKey(KeyCode.LeftControl))
@@ -39,10 +27,12 @@ public class CameraControler : MonoBehaviour {
             if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
             {
                 transform.position = new Vector3(transform.position.x + 5f, transform.position.y, transform.position.z);
+                NeuralNetwork.transform.position = new Vector3(transform.position.x - 6f, NeuralNetwork.transform.position.y, NeuralNetwork.transform.position.z);
             }
             else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
             {
                 transform.position = new Vector3(transform.position.x - 5f, transform.position.y, transform.position.z);
+                NeuralNetwork.transform.position = new Vector3(transform.position.x - 6f, NeuralNetwork.transform.position.y, NeuralNetwork.transform.position.z);
             }
         }
     }
