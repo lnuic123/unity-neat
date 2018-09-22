@@ -17,7 +17,7 @@ public class Car_Script : UnitController {
             // input array assained to constant because without it output is constantly 0.5f
             ISignalArray inputArr = box.InputSignalArray;
 
-            for (var i = 0; i < 25; i++) inputArr[i] = 0.5f;
+            for (var i = 0; i < 21; i++) inputArr[i] = 0.5f;
 
             box.Activate();
 

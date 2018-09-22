@@ -4644,6 +4644,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34b24a5348a7fbc40951edfd1c5e796d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numberOfInputs: 25
+  numberOfOutputs: 21
+  populationSize: 50
+  specieCount: 12
   Trials: 1
   TrialDuration: 50
   StoppingFitness: 1000

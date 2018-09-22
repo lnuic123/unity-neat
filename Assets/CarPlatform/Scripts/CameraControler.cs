@@ -3,15 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraControler : MonoBehaviour {
-
-    // Use this for initialization
+    
     public DrawNet NeuralNetwork;
-	void Start () {
-		
-	}
-    // Update is called once per frame
+    
     void Update () {
-        if (Input.GetKey(KeyCode.LeftControl))
+        if (Input.GetKey(KeyCode.LeftControl)) // zoom controls
         {
             if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
             {

@@ -11,8 +11,10 @@ using System.IO;
 
 public class Optimizer : MonoBehaviour {
 
-    const int NUM_INPUTS = 5; // 5 
-    const int NUM_OUTPUTS = 2; // 2
+    public int numberOfInputs = 21; // 5 
+    public int numberOfOutputs = 21; // 2
+    public int populationSize;
+    public int specieCount;
 
     public int Trials;
     public float TrialDuration;
@@ -44,10 +46,10 @@ public class Optimizer : MonoBehaviour {
         xmlConfig.LoadXml(textAsset.text);
         experiment.SetOptimizer(this);
 
-        experiment.Initialize("Car Experiment", xmlConfig.DocumentElement, NUM_INPUTS, NUM_OUTPUTS);
+        experiment.Initialize("Car Experiment", xmlConfig.DocumentElement, numberOfInputs, numberOfOutputs, populationSize, specieCount);
 
-        champFileSavePath = Application.persistentDataPath + string.Format("/PopSaveFolder/{0}.champ.xml", "car");
-        popFileSavePath = Application.persistentDataPath + string.Format("/PopSaveFolder/{0}.pop.xml", "car");       
+        champFileSavePath = Application.persistentDataPath + string.Format("/{0}.champ.xml", "car");
+        popFileSavePath = Application.persistentDataPath + string.Format("/{0}.pop.xml", "car");       
 
         print(champFileSavePath);
     }
@@ -225,6 +227,32 @@ public class Optimizer : MonoBehaviour {
         if (GUI.Button(new Rect(10, 110, 100, 40), "Run best"))
         {
             RunBest();
+        }
+        if (GUI.Button(new Rect(10, 160, 100, 40), "Save\npopulation"))
+        {
+            XmlWriterSettings _xwSettings = new XmlWriterSettings();
+            _xwSettings.Indent = true;
+            // Save genomes to xml file.        
+            DirectoryInfo dirInf = new DirectoryInfo(Application.persistentDataPath);
+            if (!dirInf.Exists)
+            {
+                Debug.Log("Creating subdirectory");
+                dirInf.Create();
+            }
+            using (XmlWriter xw = XmlWriter.Create(popFileSavePath, _xwSettings))
+            {
+                experiment.SavePopulation(xw, _ea.GenomeList);
+            }
+            // Also save the best genome
+
+            using (XmlWriter xw = XmlWriter.Create(champFileSavePath, _xwSettings))
+            {
+                experiment.SavePopulation(xw, new NeatGenome[] { _ea.CurrentChampGenome });
+            }
+            DateTime endTime = DateTime.Now;
+            Utility.Log("Population saved to directory: " + Application.persistentDataPath);
+
+            System.IO.StreamReader stream = new System.IO.StreamReader(popFileSavePath);
         }
 
         GUI.Button(new Rect(Screen.width - 130, 10, 120, 40), string.Format("Current timescale:\n" + Time.timeScale));

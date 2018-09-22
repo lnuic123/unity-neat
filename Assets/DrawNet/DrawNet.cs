@@ -74,7 +74,11 @@ public class DrawNet : MonoBehaviour
             Quaternion ConGeneRotation = Quaternion.Euler(new Vector3(transform.rotation.x, transform.rotation.y, ConnectionRotationZ));
 
             GameObject obj = Instantiate(NetDrawLine, new Vector3(TotalOffsetX + x, PositionOffsetY + y, 0f), ConGeneRotation, transform);
-            obj.transform.localScale = new Vector3(0.279f * c, obj.transform.localScale.y, obj.transform.localScale.z);
+
+            float ConWidth = Mathf.Abs((float)ConGene.Weight) / 10;
+            if (ConWidth < 0.15f) ConWidth = 0.15f;
+            else if (ConWidth > 0.6f) ConWidth = 0.6f;
+            obj.transform.localScale = new Vector3(0.279f * c, ConWidth, obj.transform.localScale.z);
         }
     }
 }

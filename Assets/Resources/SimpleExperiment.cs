@@ -96,6 +96,25 @@ public class SimpleExperiment : INeatExperiment
         _outputCount = output;
     }
 
+    public void Initialize(string name, XmlElement xmlConfig, int input, int output, int populationSize, int specieCount)
+    {
+        _name = name;
+        _populationSize = populationSize;//XmlUtils.GetValueAsInt(xmlConfig, "PopulationSize");
+        _specieCount = specieCount;//XmlUtils.GetValueAsInt(xmlConfig, "SpecieCount");
+        _activationScheme = ExperimentUtils.CreateActivationScheme(xmlConfig, "Activation");
+        _complexityRegulationStr = XmlUtils.TryGetValueAsString(xmlConfig, "ComplexityRegulationStrategy");
+        _complexityThreshold = XmlUtils.TryGetValueAsInt(xmlConfig, "ComplexityThreshold");
+        _description = XmlUtils.TryGetValueAsString(xmlConfig, "Description");
+
+        _eaParams = new NeatEvolutionAlgorithmParameters();
+        _eaParams.SpecieCount = _specieCount;
+        _neatGenomeParams = new NeatGenomeParameters();
+        _neatGenomeParams.FeedforwardOnly = _activationScheme.AcyclicNetwork;
+
+        _inputCount = input;
+        _outputCount = output;
+    }
+
     public List<NeatGenome> LoadPopulation(XmlReader xr)
     {
         NeatGenomeFactory genomeFactory = (NeatGenomeFactory)CreateGenomeFactory();
