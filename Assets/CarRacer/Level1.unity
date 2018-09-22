@@ -445,7 +445,7 @@ GameObject:
   - component: {fileID: 798153961}
   - component: {fileID: 798153962}
   m_Layer: 0
-  m_Name: Evauator
+  m_Name: Evaluator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -624,6 +624,10 @@ Prefab:
       propertyPath: MainCamera
       value: 
       objectReference: {fileID: 392212008}
+    - target: {fileID: 1659082379040080, guid: b804a320d37a0c7429ef579bf639b665, type: 2}
+      propertyPath: m_Name
+      value: DrawNeuralNetwork
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b804a320d37a0c7429ef579bf639b665, type: 2}
   m_IsPrefabAsset: 0

@@ -11,14 +11,14 @@ using System.IO;
 
 public class Optimizer : MonoBehaviour {
 
-    public int numberOfInputs = 21; // 5 
-    public int numberOfOutputs = 21; // 2
-    public int populationSize;
-    public int specieCount;
+    public int numberOfInputs = 5;
+    public int numberOfOutputs = 2;
+    public int populationSize = 50;
+    public int specieCount = 12;
 
-    public int Trials;
-    public float TrialDuration;
-    public float StoppingFitness;
+    public int Trials = 1;
+    public float TrialDuration = 50;
+    public float StoppingFitness = 1000;
     bool EARunning;
     string popFileSavePath, champFileSavePath;
 
